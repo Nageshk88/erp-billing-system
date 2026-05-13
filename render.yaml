@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: erp-billing-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: JWT_EXPIRES_IN
+        value: 8h
+      - key: MONGODB_URI
+        sync: false          # set manually on Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Render auto-generates a secure random value
+      - key: FRONTEND_URL
+        sync: false          # set after Netlify gives you the URL
