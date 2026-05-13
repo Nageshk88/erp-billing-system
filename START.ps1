@@ -1,6 +1,6 @@
-# ERP Billing System - Quick Start Script (Windows PowerShell)
+# Fynlo - Quick Start Script (Windows PowerShell)
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "  ERP Billing System - Setup & Launch   " -ForegroundColor Cyan
+Write-Host "       Fynlo - Setup & Launch           " -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 
 $backendEnv = "backend\.env"

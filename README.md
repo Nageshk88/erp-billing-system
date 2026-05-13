@@ -1,4 +1,4 @@
-# ERP Billing System
+# Fynlo
 
 A full-stack, browser-based Advanced Billing & ERP Software built for trading businesses. Manages the complete sales and purchase workflow, inventory, accounting, and includes four powerful custom features for smarter selling.
 

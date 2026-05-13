@@ -75,8 +75,8 @@ export default function Sidebar() {
   return (
     <aside className={`fixed top-0 left-0 h-full bg-gray-900 text-white flex flex-col z-20 transition-all duration-200 ${sidebarOpen ? 'w-64' : 'w-16'}`}>
       <div className={`flex items-center gap-3 px-4 py-5 border-b border-gray-700 ${!sidebarOpen && 'justify-center'}`}>
-        <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">E</div>
-        {sidebarOpen && <span className="font-bold text-base leading-tight">ERP Billing<br /><span className="text-xs font-normal text-gray-400">Trading Suite</span></span>}
+        <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">F</div>
+        {sidebarOpen && <span className="font-bold text-base leading-tight">Fynlo<br /><span className="text-xs font-normal text-gray-400">Trading Suite</span></span>}
       </div>
 
       <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-1 scrollbar-thin">

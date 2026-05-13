@@ -28,9 +28,9 @@ export default function Login() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-            <span className="text-2xl font-black text-primary-600">ERP</span>
+            <span className="text-2xl font-black text-primary-600">F</span>
           </div>
-          <h1 className="text-3xl font-bold text-white">ERP Billing System</h1>
+          <h1 className="text-3xl font-bold text-white">Fynlo</h1>
           <p className="text-primary-300 mt-1">Trading Business Suite</p>
         </div>
 

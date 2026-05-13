@@ -29,7 +29,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok', db: 'mongodb', version
   try {
     await connect();
     console.log('✅ MongoDB Atlas connected');
-    app.listen(PORT, () => console.log(`🚀 ERP Backend running on http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`🚀 Fynlo Backend running on http://localhost:${PORT}`));
   } catch (err) {
     console.error('❌ Startup error:', err.message);
     process.exit(1);
