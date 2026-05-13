@@ -7,7 +7,7 @@ $backendEnv = "backend\.env"
 if (-not (Test-Path $backendEnv)) {
     Write-Host "`n[1/4] Creating backend .env from example..." -ForegroundColor Yellow
     Copy-Item "backend\.env.example" $backendEnv
-    Write-Host "      Created backend\.env (using SQLite - no DB install needed)" -ForegroundColor Green
+    Write-Host "      Created backend\.env - add your MongoDB Atlas URI before starting" -ForegroundColor Green
 }
 
 Write-Host "`n[2/4] Installing backend dependencies..." -ForegroundColor Yellow
