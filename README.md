@@ -188,8 +188,54 @@ GET    /api/reports/profit-loss
 GET    /api/reports/receivables
 GET    /api/warehouses
 GET    /api/lsp
+POST   /api/items/bulk-update
 GET    /health
 ```
+
+---
+
+## Bulk Item Update (External Automation)
+
+`POST /api/items/bulk-update` is intended to be called by an external automation — such as **Power Automate reading an Excel Online table** on a schedule — to sync price and stock changes from a spreadsheet into the ERP without anyone manually exporting/uploading a CSV. It is **not** used by the frontend UI.
+
+- **Auth:** Requires a valid JWT (`Authorization: Bearer <token>`) for a user with the **Admin** role.
+- **Stock semantics:** `stock` is treated as the new absolute quantity and is written to the default warehouse's `Inventory` record (the `Warehouse` with `isDefault: true`), with a `StockMovement` audit row recorded for the delta — the same place every other part of the app reads stock from. If no default warehouse is configured, stock updates fail per-row (price updates still proceed).
+- **Performance:** Uses Mongoose `bulkWrite()` for both `Item` and `Inventory` updates instead of per-row `save()` calls, so large sheets (thousands of rows) sync in a small, constant number of round trips.
+- **Partial failure:** Unknown SKUs and invalid rows are skipped and reported individually — a bad row never fails the whole batch.
+
+### Request
+
+```
+POST /api/items/bulk-update
+Authorization: Bearer <admin JWT>
+Content-Type: application/json
+
+{
+  "updates": [
+    { "sku": "ITM-001", "sellingPrice": 199.99, "stock": 50 },
+    { "sku": "ITM-002", "sellingPrice": 249.00 },
+    { "sku": "ITM-003", "stock": 12 }
+  ]
+}
+```
+
+Each row must include `sku` and at least one of `sellingPrice` or `stock`. Both, when present, must be non-negative numbers.
+
+### Response
+
+```json
+{
+  "totalReceived": 3,
+  "updated": 2,
+  "notFoundCount": 1,
+  "failedCount": 0,
+  "notFound": ["ITM-002"],
+  "failed": []
+}
+```
+
+- `notFound` — SKUs that don't match any existing item.
+- `failed` — rows that were malformed or couldn't be applied, e.g. `{ "sku": "ITM-004", "reason": "sellingPrice must be a non-negative number" }`.
 
 ---
 

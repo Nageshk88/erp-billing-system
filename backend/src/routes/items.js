@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers/itemsController');
-const { authenticate, scrubCostData } = require('../middleware/auth');
+const { authenticate, scrubCostData, requireAdmin } = require('../middleware/auth');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -22,5 +22,6 @@ router.post('/', ctrl.create);
 router.put('/:id', ctrl.update);
 router.delete('/:id', ctrl.remove);
 router.post('/:id/image', upload.single('image'), ctrl.uploadImage);
+router.post('/bulk-update', requireAdmin, ctrl.bulkUpdate);
 
 module.exports = router;
